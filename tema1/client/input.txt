@@ -2,3 +2,4 @@ Ion
 ex1 casa masa trei tanc 4321
 ex1 abcd efgh ijkl mnop 1234
 ex2 abd4g5 1sdf6fd fd2fdsf5
+ex3 12 13 14

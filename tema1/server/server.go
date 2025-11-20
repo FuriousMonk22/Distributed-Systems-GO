@@ -5,8 +5,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"math"
 	"net"
 	"os"
+	"strconv"
 	"strings"
 )
 
@@ -47,7 +49,7 @@ func handleConnection(conn net.Conn, cfg *config) {
 	name, _ := reader.ReadString('\n')
 	name = strings.TrimSpace(name)
 
-	fmt.Printf("Client: %s conectat.\n", name)
+	fmt.Printf("Client %s conectat.\n", name)
 	conn.Write([]byte("Conectat\n"))
 
 	remoteAddr := conn.RemoteAddr().String()
@@ -75,7 +77,7 @@ func handleConnection(conn net.Conn, cfg *config) {
 
 		result := rezolva(req.Args)
 
-		fmt.Println("Server trimite", result, "catre client.")
+		fmt.Println("Client " + name + " a primit răspunsul: " + result)
 
 		conn.Write([]byte(result + "\n"))
 	}
@@ -126,11 +128,71 @@ func ex1(args []string) string {
 }
 
 func ex2(args []string) string {
-	return "rezultat ex2 (de implementat)"
+	if len(args) < 2 {
+		return "eroare: numar insuficient de argumente pentru ex2"
+	}
+
+	count := 0
+
+	for _, word := range args[1:] {
+		var digitsBuilder strings.Builder
+		for _, ch := range word {
+			if ch >= '0' && ch <= '9' {
+				digitsBuilder.WriteRune(ch)
+			}
+		}
+
+		digitsStr := digitsBuilder.String()
+		if digitsStr == "" {
+			continue
+		}
+
+		n, err := strconv.Atoi(digitsStr)
+		if err != nil {
+			continue
+		}
+
+		root := int(math.Sqrt(float64(n)))
+		if root*root == n {
+			count++
+		}
+	}
+	return fmt.Sprintf("Numar de cuvinte cu numere patrate: %d", count)
 }
 
 func ex3(args []string) string {
-	return "rezultat ex3 (de implementat)"
+	if len(args) < 2 {
+		return "eroare: numar insuficient de argumente pentru ex3"
+	}
+
+	sum := 0
+
+	for _, s := range args[1:] {
+		n, err := strconv.Atoi(s)
+		if err != nil {
+			return "eroare: toate argumentele trebuie sa fie numere intregi"
+		}
+		sum += reverseInt(n)
+	}
+	return fmt.Sprintf("Suma numerelor inversate este: %d", sum)
+}
+
+func reverseInt(n int) int {
+
+	if n == 0 {
+		return 0
+	}
+
+	if n < 0 {
+		return -reverseInt(-n)
+	}
+
+	rev := 0
+	for n > 0 {
+		rev = rev*10 + n%10
+		n /= 10
+	}
+	return rev
 }
 
 func ex5(args []string) string {
