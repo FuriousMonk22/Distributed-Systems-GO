@@ -196,7 +196,42 @@ func reverseInt(n int) int {
 }
 
 func ex5(args []string) string {
-	return "rezultat ex5 (de implementat)"
+	if len(args) < 2 {
+		return "eroare: număr insuficient de argumente pentru ex5"
+	}
+
+	var results []string
+
+	for _, s := range args[1:] {
+		s = strings.TrimSpace(s)
+		if s == "" {
+			continue
+		}
+
+		isBinary := true
+		for _, ch := range s {
+			if ch != '0' && ch != '1' {
+				isBinary = false
+				break
+			}
+		}
+		if !isBinary {
+			continue
+		}
+
+		n, err := strconv.ParseInt(s, 2, 64)
+		if err != nil {
+			continue
+		}
+
+		results = append(results, fmt.Sprintf("%d", n))
+	}
+
+	if len(results) == 0 {
+		return "Niciun șir binar valid găsit."
+	}
+
+	return strings.Join(results, ", ")
 }
 
 func ex11(args []string) string {
