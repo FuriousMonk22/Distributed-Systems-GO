@@ -235,7 +235,44 @@ func ex5(args []string) string {
 }
 
 func ex11(args []string) string {
-	return "rezultat ex11 (de implementat)"
+	if len(args) < 3 {
+		return "eroare: număr insuficient de argumente pentru ex11"
+	}
+
+	k, err := strconv.Atoi(args[1])
+	if err != nil || k < 0 {
+		return "eroare: al doilea argument trebuie să fie un număr întreg pozitiv"
+	}
+
+	sum := 0
+	for _, s := range args[2:] {
+		if len(s) == 0 {
+			return "eroare: număr invalid"
+		}
+
+		sign := 1
+		if strings.HasPrefix(s, "-") {
+			sign = -1
+			s = s[1:]
+			if len(s) == 0 {
+				return "eroare: număr invalid"
+			}
+		}
+
+		kmod := k % len(s)
+		if kmod != 0 {
+			s = s[len(s)-kmod:] + s[:len(s)-kmod]
+		}
+
+		n, err := strconv.Atoi(s)
+		if err != nil {
+			return "eroare: număr invalid (toate argumentele trebuie să fie numere întregi)"
+		}
+
+		sum += sign * n
+	}
+
+	return fmt.Sprintf("Suma numerelor după permutare este: %d", sum)
 }
 
 func main() {
