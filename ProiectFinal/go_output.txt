@@ -1,0 +1,23 @@
+Parametri (Enter = default):
+Numar procese (p_count) [5]: Clock initial pentru pid 0 [0]: Clock initial pentru pid 1 [0]: Clock initial pentru pid 2 [0]: Clock initial pentru pid 3 [0]: Clock initial pentru pid 4 [0]: Clock initial pentru pid 5 [0]: Clock initial pentru pid 6 [0]: Poll interval (ms) [25]: CS duration (ms) [200]: Main runtime (sec) [5]: 
+pid 6 request
+pid 0 request
+pid 1 request
+pid 2 request
+pid 3 request
+pid 4 request
+pid 5 request
+pid 0 entered CS
+pid 0 left CS
+pid 1 entered CS
+pid 1 left CS
+pid 2 entered CS
+pid 2 left CS
+pid 3 entered CS
+pid 3 left CS
+pid 4 entered CS
+pid 4 left CS
+pid 5 entered CS
+pid 5 left CS
+pid 6 entered CS
+pid 6 left CS

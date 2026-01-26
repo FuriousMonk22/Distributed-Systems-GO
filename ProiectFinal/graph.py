@@ -64,7 +64,7 @@ def parse_events(go_output: str):
     return events, t
 
 
-def plot_timeline(events, t_max, out_png="lamport_timeline.png"):
+def plot_timeline(events, t_max, out_png="./ProiectFinal/lamport_timeline.png"):
     if not events:
         print("N-am găsit evenimente în output (linii de forma: 'pid X request/entered CS/left CS').")
         return
@@ -152,11 +152,11 @@ def main():
     go_out = run_go_and_capture(go_stdin)
 
     # (opțional) salvează output-ul pentru debugging
-    with open("go_output.txt", "w", encoding="utf-8") as f:
+    with open("./ProiectFinal/go_output.txt", "w", encoding="utf-8") as f:
         f.write(go_out)
 
     events, t_max = parse_events(go_out)
-    plot_timeline(events, t_max, out_png="lamport_timeline.png")
+    plot_timeline(events, t_max, out_png="./ProiectFinal/lamport_timeline.png")
 
 
 if __name__ == "__main__":
